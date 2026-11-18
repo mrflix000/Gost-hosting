@@ -1,0 +1,1 @@
+// Custom-domain adapter placeholder. Verify Railway domain mutation API before enabling.\n

@@ -1,0 +1,1 @@
+// Log streaming adapter placeholder. Do not present static text as live runtime logs.\n

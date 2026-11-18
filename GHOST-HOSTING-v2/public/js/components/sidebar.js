@@ -1,0 +1,1 @@
+// Sidebar navigation is mounted in public/index.html and wired by app.js.\n

@@ -1,0 +1,1 @@
+export function emptyRow(message){return `<tr><td colspan=\"8\">${message}</td></tr>`}\n
