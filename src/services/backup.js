@@ -1,0 +1,1 @@
+// Backup/restore adapter placeholder. Implement storage snapshots before enabling in UI.\n
