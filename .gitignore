@@ -1,1 +1,7 @@
-node_modules/\n.env\n*.log\n
+node_modules/
+.env
+data/
+project-files/
+*.db
+*.db-journal
+.DS_Store
