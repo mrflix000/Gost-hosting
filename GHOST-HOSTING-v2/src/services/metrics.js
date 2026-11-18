@@ -1,1 +1,0 @@
-// Metrics adapter placeholder. Connect to verified Railway metrics API before displaying values.\n

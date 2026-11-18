@@ -1,1 +1,0 @@
-export {modal,closeModal} from '../ui.js';\n

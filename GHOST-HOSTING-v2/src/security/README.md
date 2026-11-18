@@ -1,1 +1,0 @@
-Security checklist: keep API tokens server-side; use HTTPS; configure session secret; attach persistent volume; review authorization and API scopes; add CSRF protection before enabling cross-site state-changing integrations.\n

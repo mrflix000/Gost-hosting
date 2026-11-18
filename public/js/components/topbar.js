@@ -1,1 +1,0 @@
-// Topbar shell is mounted in public/index.html.\n

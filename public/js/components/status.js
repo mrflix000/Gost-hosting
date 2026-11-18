@@ -1,1 +1,0 @@
-export function statusTag(value){return `<span class=\"tag\">${String(value)}</span>`}\n
