@@ -25,7 +25,7 @@ r.post("/users", async (req, res, next) => {
     const hash = await argon2.hash(password, { type: argon2.argon2id });
     await query(
       "INSERT INTO users(username, email, password_hash, role) VALUES(?, ?, ?, ?)",
-      [username, email.toLowerCase(), hash, role === "admin" ? "admin" : "user"]
+      [username, email.toLowerCase(), hash, ["admin","demo"].includes(role) ? role : "user"]
     );
     await audit(req.session.user.id, "user.create", { username });
     res.status(201).json({ ok: true });

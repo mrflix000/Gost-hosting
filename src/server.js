@@ -9,6 +9,7 @@ import { validateEnv, isSqlite } from "./config/env.js";
 import { query } from "./db/pool.js";
 import { bootstrapOwner } from "./services/bootstrap.js";
 import { errorHandler } from "./middleware/errors.js";
+import { blockDemoWrites } from "./middleware/auth.js";
 import auth from "./routes/auth.js";
 import admin from "./routes/admin.js";
 import projects from "./routes/projects.js";
@@ -29,15 +30,16 @@ app.use(express.json({ limit: "2mb" }));
 app.use(rateLimit({ windowMs: 60_000, limit: 200, standardHeaders: true, legacyHeaders: false }));
 
 app.use(session({
-  name: "ghost.sid",
+  name: "gost.sid",
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: "auto",
     sameSite: "lax",
-    maxAge: 12 * 60 * 60 * 1000
+    maxAge: 12 * 60 * 60 * 1000,
+    path: "/"
   }
 }));
 
@@ -50,9 +52,9 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/auth", auth);
-app.use("/api/admin", admin);
-app.use("/api/projects", projects);
-app.use("/api/railway", railway);
+app.use("/api/admin", blockDemoWrites, admin);
+app.use("/api/projects", blockDemoWrites, projects);
+app.use("/api/railway", blockDemoWrites, railway);
 app.use("/api/activity", activity);
 
 
@@ -183,6 +185,10 @@ async function ensureSchema() {
 async function start() {
   await ensureSchema();
   await bootstrapOwner();
+  try {
+    const { bootstrapDemo } = await import("./services/bootstrap.js");
+    await bootstrapDemo();
+  } catch (e) { console.log("demo bootstrap:", e.message); }
   const port = Number(process.env.PORT || 3000);
   app.listen(port, "0.0.0.0", () => {
     console.log(`Gost Hosting online on :${port} (${isSqlite() ? "SQLite" : "PostgreSQL"})`);

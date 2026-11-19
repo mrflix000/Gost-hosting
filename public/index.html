@@ -17,28 +17,44 @@
     <div class="logo" id="loginLogo"></div>
     <p class="eyebrow">PREMIUM CONTROL PLANE</p>
     <h1>GOST <em>HOSTING</em></h1>
-    <form id="loginForm" class="glass">
-      <label>Username / Email
-        <input name="username" required autocomplete="username" placeholder="owner">
-      </label>
-      <label>Password
-        <input name="password" type="password" required autocomplete="current-password" placeholder="••••••••••••">
-      </label>
-      <button class="btn primary wide" type="submit">Sign in</button>
-      <p id="loginError" class="error"></p>
-    </form>
+
+    <div id="loginPanel" class="glass" style="width:100%;max-width:380px;padding:1.8rem">
+      <form id="loginForm" style="display:flex;flex-direction:column;gap:1rem">
+        <label>Username / Email
+          <input name="username" required autocomplete="username" placeholder="username">
+        </label>
+        <label>Password
+          <input name="password" type="password" required autocomplete="current-password" placeholder="••••••••••••">
+        </label>
+        <button class="btn primary wide" type="submit">Sign in</button>
+        <p id="loginError" class="error"></p>
+      </form>
+      <p class="subtle" style="text-align:center;margin-top:1rem;font-size:0.85rem">
+        No account? <a href="#" id="showRegister">Register</a>
+        · Demo: <code>demo</code> / <code>demo-view-only-1</code>
+      </p>
+    </div>
+
+    <div id="registerPanel" class="glass hidden" style="width:100%;max-width:380px;padding:1.8rem">
+      <form id="registerForm" style="display:flex;flex-direction:column;gap:1rem">
+        <label>Username <input name="username" required minlength="3" maxlength="40"></label>
+        <label>Email <input name="email" type="email" required></label>
+        <label>Password <input name="password" type="password" required minlength="10"></label>
+        <button class="btn primary wide" type="submit">Create account</button>
+        <p id="registerError" class="error"></p>
+      </form>
+      <p class="subtle" style="text-align:center;margin-top:1rem;font-size:0.85rem">
+        <a href="#" id="showLogin">Back to sign in</a>
+      </p>
+    </div>
   </div>
 
   <div id="shell" class="shell hidden">
     <aside class="sidebar">
       <div class="brand">
         <div class="logo mini" id="brandLogo"></div>
-        <div>
-          <b>GOST</b>
-          <small>HOSTING</small>
-        </div>
+        <div><b>GOST</b><small>HOSTING</small></div>
       </div>
-
       <div class="nav-label">WORKSPACE</div>
       <button class="nav active" data-page="overview"><span class="nav-ico" data-ico="overview"></span> Overview</button>
       <button class="nav" data-page="projects"><span class="nav-ico" data-ico="projects"></span> Projects</button>
@@ -46,18 +62,12 @@
       <button class="nav" data-page="packages"><span class="nav-ico" data-ico="packages"></span> Packages</button>
       <button class="nav" data-page="console"><span class="nav-ico" data-ico="console"></span> Terminal</button>
       <button class="nav" data-page="settings"><span class="nav-ico" data-ico="settings"></span> Settings</button>
-
       <div class="nav-label">ADMINISTRATION</div>
       <button class="nav admin" data-page="users"><span class="nav-ico" data-ico="users"></span> Users</button>
       <button class="nav admin" data-page="railway"><span class="nav-ico" data-ico="railway"></span> Railway</button>
       <button class="nav admin" data-page="activity"><span class="nav-ico" data-ico="activity"></span> Activity</button>
-
-      <div class="sidebar-foot">
-        <span class="online-dot"></span>
-        All systems operational
-      </div>
+      <div class="sidebar-foot"><span class="online-dot"></span> All systems operational</div>
     </aside>
-
     <main class="main">
       <header class="topbar">
         <div>
@@ -78,7 +88,6 @@
 
   <div id="dialogRoot"></div>
   <div class="toast-container" id="toasts"></div>
-
   <script type="module" src="/js/app.js"></script>
 </body>
 </html>
